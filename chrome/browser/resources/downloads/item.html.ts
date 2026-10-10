@@ -58,6 +58,16 @@ export function getHtml(this: DownloadsItemElement) {
         $i18n{asyncScanningDownloadDescSecond}
       </div>
 
+      ${this.data?.sha256 ? html`
+        <div role="gridcell">
+          <div id="sha256" title="Click to copy SHA-256"
+              @click="${this.onSha256Click_}">
+            <span id="sha256-label">SHA-256:</span>
+            <span id="sha256-value">${this.data.sha256}</span>
+          </div>
+        </div>
+      ` : ''}
+
       ${this.showProgress_ ? html`
         <div role="gridcell">
           <cr-progress id="progress" .indeterminate="${this.isIndeterminate_()}"

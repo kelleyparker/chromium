@@ -1107,6 +1107,17 @@ export class DownloadsItemElement extends DownloadsItemElementBase {
         .finally(() => this.displayCopyToast_(e, copied));
   }
 
+  protected onSha256Click_(e: Event) {
+    if (!this.data || !this.data.sha256) {
+      return;
+    }
+    navigator.clipboard.writeText(this.data.sha256)
+        .then(() => getToastManager().show('SHA-256 copied to clipboard'))
+        .catch(error => console.error('Unable to copy to clipboard:', error));
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
   protected onMoreActionsClick_() {
     const button = this.getMoreActionsButton();
     // The menu button is not always shown, but if this handler is invoked, then

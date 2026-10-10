@@ -499,6 +499,12 @@ downloads::mojom::DataPtr DownloadsListTracker::CreateDownloadData(
   file_value->has_safe_browsing_verdict =
       WasSafeBrowsingVerdictObtained(download_item);
 
+  // The hash of an interrupted download is only a partial hash, so only expose
+  // it once the file is completely downloaded.
+  if (download_item->GetState() == download::DownloadItem::COMPLETE) {
+    file_value->sha256 = base::HexEncodeLower(download_item->GetHash());
+  }
+
   if (download_model.IsDangerous()) {
     MaybeRecordDangerousDownloadWarningShown(download_model);
   }

@@ -113,6 +113,9 @@ struct Data {
   // Whether the download had a Safe Browsing verdict. This is used to determine
   // whether to call a file type warning "suspicious" or "unverified".
   bool has_safe_browsing_verdict;
+  // Lowercase hex encoded SHA-256 of the downloaded file. Empty unless the
+  // download is complete and the hash was computed.
+  string sha256;
 };
 
 // The parameter "id" is the id of the current download

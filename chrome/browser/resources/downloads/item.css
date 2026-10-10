@@ -275,6 +275,24 @@ cr-button {
   margin-top: 6px;
 }
 
+#sha256 {
+  color: var(--cr-secondary-text-color);
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 6px;
+  /* Long hex string: wrap anywhere, and let the user select/copy it. */
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+#sha256:hover #sha256-value {
+  text-decoration: underline;
+}
+
+#sha256-value {
+  font-family: monospace;
+}
+
 :host-context([dir=rtl]) #name {
   direction: ltr;
 }
