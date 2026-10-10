@@ -46,6 +46,19 @@ suite('ItemTest', function() {
     assertFalse(item.$.fileLink.hasAttribute('href'));
   });
 
+  test('sha256 is only displayed when present', async () => {
+    item.data = createDownload({sha256: ''});
+    await microtasksFinished();
+    assertEquals(null, item.shadowRoot.querySelector('#sha256'));
+
+    const hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+    item.data = createDownload({sha256: hash});
+    await microtasksFinished();
+    const value = item.shadowRoot.querySelector<HTMLElement>('#sha256-value');
+    assertTrue(!!value);
+    assertEquals(hash, value.textContent!.trim());
+  });
+
   test('initiator origin empty string in data isn\'t displayed', async () => {
     const item = document.createElement('downloads-item');
     document.body.innerHTML = window.trustedTypes!.emptyHTML;

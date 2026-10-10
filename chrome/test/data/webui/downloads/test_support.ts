@@ -132,6 +132,7 @@ export function createDownload(config?: Partial<MojomData>): MojomData {
         displayInitiatorOrigin: 'http://permission.site',
         safeBrowsingState: SafeBrowsingState.kStandardProtection,
         hasSafeBrowsingVerdict: true,
+        sha256: '',
       },
       config || {});
 }
